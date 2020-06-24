@@ -23,7 +23,6 @@ io.on('connection', (socket) => {
 
         io.to(user.room).emit('roomData', { room: user.room, users: getUserInRoom(user.room) })
 
-
         callback();
     })
 
@@ -36,8 +35,8 @@ io.on('connection', (socket) => {
     })
 
     socket.on("disconnect", () => {
-        const user = removeUser(socket.id)
-        console.log("disconnected...")
+        const user = removeUser(socket.id);
+        console.log("disconnected...");
 
         if (user) {
             io.to(user.room).emit('message', { user: "admin", text: `${user.name} has left` })
